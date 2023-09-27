@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjk1lhx7fq6yk"]
+
+[ext_resource type="Texture2D" uid="uid://iypgwno25iud" path="res://graphics/player/player.png" id="1_oxyqf"]
+[ext_resource type="Texture2D" uid="uid://ctqg6xbgi12af" path="res://graphics/projectiles/blue.png" id="2_em6hg"]
+
+[node name="player" type="Node2D"]
+
+[node name="playerImage" type="Sprite2D" parent="."]
+texture = ExtResource("1_oxyqf")
+
+[node name="laserImage" type="Sprite2D" parent="playerImage"]
+position = Vector2(17, -211)
+texture = ExtResource("2_em6hg")
