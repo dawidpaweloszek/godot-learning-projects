@@ -6,13 +6,24 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_v5w18"]
 radius = 64.0078
 
-[node name="player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_3l68k")
 
-[node name="playerImage" type="Sprite2D" parent="."]
+[node name="PlayerImage" type="Sprite2D" parent="."]
 position = Vector2(3, -40)
 texture = ExtResource("2_082dj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 shape = SubResource("CircleShape2D_v5w18")
+
+[node name="TimerLaser" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="TimerGranade" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="TimerLaser" to="." method="_on_timer_laser_timeout"]
+[connection signal="timeout" from="TimerGranade" to="." method="_on_timer_granade_timeout"]

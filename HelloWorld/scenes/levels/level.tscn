@@ -1,23 +1,33 @@
-[gd_scene load_steps=6 format=3 uid="uid://cv5f6n8sd18wh"]
+[gd_scene load_steps=5 format=3 uid="uid://cv5f6n8sd18wh"]
 
 [ext_resource type="Script" path="res://scenes/levels/level.gd" id="1_qpwn1"]
-[ext_resource type="PackedScene" uid="uid://c534i3tro0x2a" path="res://scenes/objects/bed.tscn" id="3_gyqyb"]
-[ext_resource type="PackedScene" uid="uid://bi056c8vb64hj" path="res://scenes/objects/billboard.tscn" id="3_nfjnf"]
+[ext_resource type="Texture2D" uid="uid://c3my35n5b4tkf" path="res://graphics/objects/gate.png" id="3_q0a05"]
 [ext_resource type="PackedScene" uid="uid://bjk1lhx7fq6yk" path="res://scenes/player/player.tscn" id="4_r4atl"]
-[ext_resource type="PackedScene" uid="uid://g3ymste68pg5" path="res://scenes/enemies/drone.tscn" id="5_25cey"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x0gqf"]
+size = Vector2(848, 328)
 
 [node name="level" type="Node2D"]
 script = ExtResource("1_qpwn1")
 
-[node name="bed" parent="." instance=ExtResource("3_gyqyb")]
-position = Vector2(823, 5)
+[node name="gate" type="StaticBody2D" parent="."]
+position = Vector2(507, -533)
 
-[node name="billboard" parent="." instance=ExtResource("3_nfjnf")]
-position = Vector2(267, 595)
-rotation = -0.263545
+[node name="gate_img" type="Sprite2D" parent="gate"]
+texture = ExtResource("3_q0a05")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="gate"]
+visible = false
+polygon = PackedVector2Array(-1431, -781, -1434, 530, -1433, 564, -1423, 606, -1400, 650, -1386, 672, -1367, 694, -1349, 712, -1329, 727, -1306, 744, -1277, 757, -1247, 769, -1204, 777, -368, 776, -365, 445, 489, 444, 490, 777, 1320, 775, 1366, 770, 1410, 754, 1438, 740, 1477, 712, 1503, 683, 1523, 650, 1542, 617, 1552, 577, 1558, 533, 1558, -782)
+
+[node name="Area2D" type="Area2D" parent="gate"]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="gate/Area2D"]
+position = Vector2(62, 752)
+shape = SubResource("RectangleShape2D_x0gqf")
 
 [node name="player" parent="." instance=ExtResource("4_r4atl")]
-position = Vector2(955, 341)
+position = Vector2(608, 575)
 
-[node name="drone" parent="." instance=ExtResource("5_25cey")]
-position = Vector2(-115, 560)
+[connection signal="body_entered" from="gate/Area2D" to="." method="_on_area_2d_body_entered"]
